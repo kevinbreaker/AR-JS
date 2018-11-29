@@ -1,0 +1,197 @@
+<!--
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+  <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+-->
+
+<!--
+  <body style="margin : 0px; overflow: hidden;">
+    <a-scene embedded arjs="trackingMethod:best">
+      <a-camera></a-camera>
+      <a-anchor hit-testing-enabled="true">
+        <a-entity
+          position="0.5 0 -0.5"
+          scale="0.20 0.20 0.20"
+          color="red"
+          rotation="90 9 9"
+          obj-model="obj: url(./Glock 3d.obj)"
+        ></a-entity>
+        <a-sphere
+          color="red"
+          position="0.5 1.5 -0.5"
+          radius="0.15"
+          rotation="1 0.5 0"
+        >
+          <a-animation
+            attribute="color"
+            dur="1000"
+            from="blue"
+            direction="alternate"
+            to="purple"
+            repeat="indefinite"
+          ></a-animation>
+          <a-animation direction="alternate" attribute="radius" dur="1000" to="1" repeat="indefinite">
+          </a-animation>
+        </a-sphere>
+      </a-anchor>
+      <a-camera-static></a-camera-static>
+    </a-scene>
+  </body>
+-->
+<!-- O que eu fiz -->
+
+<!--
+  <a-scene>
+    <a-plane width="10" height="10" position="0 0 -2.5" color="#000"></a-plane>
+  </a-scene>
+-->
+
+<!--
+  <script>
+    const $ = queryString =>
+      document.querySelector(queryString);
+
+    const shiftHue = hue =>
+      (hue + 1) % 360;
+
+    let hue = 0;
+
+    const animate = () => {
+      hue = shiftHue(hue);
+      const color = `hsl(${hue}, 100%, 50%)`;
+      $('a-sphere').setAttribute('color', color);
+
+      const variation = Math.sin(Date.now() / 1000)
+      const position = `0 ${1.5 + variation} -4`
+
+      $('a-sphere').setAttribute('position', position)
+
+      $('a-plane').setAttribute('rotation', `-90 ${90 * variation} 0`)
+      $('a-plane').setAttribute('color', color)
+
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  </script>
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>web AR</title>
+    <script src="./scripts/aframe.js"></script>
+    <script src="./scripts/animationsComponent.js"></script>
+    <script src="./scripts/gradientSky.js"></script>
+    <script src="./scripts/oceanComponent.js"></script>
+    <script src="./scripts/physicsSystem1.4.js"></script>
+    <script src="./scripts/particleSystemComponent.js"></script>
+  </head>
+  <body>
+    <a-scene physic>
+      <a-assets>
+        <a-asset-item id="tree" src="./assets/plane/scene.gltf"></a-asset-item>
+        <!-- <a-asset-item id="tree-obj" src="./assets/boat.obj"></a-asset-item>
+        <a-asset-item id="tree-mtl" src="./assets/boat.mtl"></a-asset-item> -->
+      </a-assets>
+      <a-entity
+        id="rain"
+        particle-system="preset: rain; color: #fff; particleCount: 1000"
+      ></a-entity>
+      <a-entity
+        position="0 -1 -15"
+        scale="0.01 0.01 0.01"
+        color="red"
+        rotation="280 0 0"
+        gltf-model-legacy="#tree"
+        animation="property: position; easing: easeInOutQuad; dir: forwards; dur: 6000; to: -15 -3 -15"
+        animation="property: rotation; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 280 180 0; repeat: indefinite "
+        ></a-entity>
+        <!-- obj-model="obj: #tree-obj; mtl: #tree-mtl" -->
+      <!--
+        <a-entity id="sphere" geometry="primitive: sphere"
+             material="color: #ffa; shader: flat"
+             position="0 0.15 -1"
+             light="type: spot; intensity: 15"
+             animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 -0.10 -5; loop: true"></a-entity>
+      -->
+      <a-box
+        color="#EF2D5E"
+        position="0 1 -4"
+        change-color-on-hover="color: blue"
+      ></a-box>
+
+      <a-camera><a-cursor></a-cursor></a-camera>
+      <a-entity
+        id="ocean"
+        ocean="density: 10; width: 50; depth: 50; speed: 4"
+        material="color: #afd; opacity: 0.75; metalness: 0; roughness: 1"
+        event-set__enter="_event: mouseenter; color: #8FF7FF"
+        event-set__leave="_event: mouseleave; color: #4CC3D9"
+        rotation="-90 0 0"
+      ></a-entity>
+
+      <a-entity
+        id="sky"
+        geometry="primitive: sphere; radius: 5000"
+        material="shader: gradient; topColor: 100 155 250; bottomColor: 00 05 110"
+        scale="-1 1 1"
+      ></a-entity>
+
+      <a-entity id="light" light="type: ambient; color: #888"></a-entity>
+    </a-scene>
+    <!--
+      <a-scene physic>
+        <a-box
+          position="-1 4 -3"
+          rotation="0 45 0"
+          color="#4CC3D9"
+          dynamic-body
+        ></a-box>
+        <a-box position="-1 8 -3" rotation="0 45 0" dynamic-body color="#4CC3D9"></a-box>
+        <a-sphere position="0 4.25 -5" radius="1.25" dynamic-body color="#EF2D5E"></a-sphere>
+        <a-entity geometry="primitive: sphere; radius: 1.5"
+            light="type: point; color: #DEADFE; intensity: 9"
+            material="color: white; shader: flat;"
+            position="-1 1 -6"></a-entity>
+        <a-cylinder
+          position="1 12.75 -3"
+          radius="0.5"
+          height="1.5"
+          dynamic-body color="#FFC65D"
+        ></a-cylinder>
+        <a-plane
+          position="0 0 -4"
+          rotation="-90 0 0"
+          width="4"
+          height="4"
+          color="#7BC8A4"
+          static-body
+        ></a-plane>
+        <a-sky color="#212121"></a-sky>
+      </a-scene>
+    -->
+    <script>
+      AFRAME.registerComponent('change-color-on-hover', {
+        schema: {
+          color: { default: 'red' }
+        },
+
+        init: function() {
+          var data = this.data;
+          var el = this.el; // <a-box>
+          var defaultColor = el.getAttribute('material').color;
+
+          el.addEventListener('mouseenter', function() {
+            el.setAttribute('color', data.color);
+          });
+
+          el.addEventListener('mouseleave', function() {
+            el.setAttribute('color', defaultColor);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
