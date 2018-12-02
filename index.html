@@ -1,197 +1,311 @@
-<!--
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
-  <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
--->
-
-<!--
-  <body style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs="trackingMethod:best">
-      <a-camera></a-camera>
-      <a-anchor hit-testing-enabled="true">
-        <a-entity
-          position="0.5 0 -0.5"
-          scale="0.20 0.20 0.20"
-          color="red"
-          rotation="90 9 9"
-          obj-model="obj: url(./Glock 3d.obj)"
-        ></a-entity>
-        <a-sphere
-          color="red"
-          position="0.5 1.5 -0.5"
-          radius="0.15"
-          rotation="1 0.5 0"
-        >
-          <a-animation
-            attribute="color"
-            dur="1000"
-            from="blue"
-            direction="alternate"
-            to="purple"
-            repeat="indefinite"
-          ></a-animation>
-          <a-animation direction="alternate" attribute="radius" dur="1000" to="1" repeat="indefinite">
-          </a-animation>
-        </a-sphere>
-      </a-anchor>
-      <a-camera-static></a-camera-static>
-    </a-scene>
-  </body>
--->
-<!-- O que eu fiz -->
-
-<!--
-  <a-scene>
-    <a-plane width="10" height="10" position="0 0 -2.5" color="#000"></a-plane>
-  </a-scene>
--->
-
-<!--
-  <script>
-    const $ = queryString =>
-      document.querySelector(queryString);
-
-    const shiftHue = hue =>
-      (hue + 1) % 360;
-
-    let hue = 0;
-
-    const animate = () => {
-      hue = shiftHue(hue);
-      const color = `hsl(${hue}, 100%, 50%)`;
-      $('a-sphere').setAttribute('color', color);
-
-      const variation = Math.sin(Date.now() / 1000)
-      const position = `0 ${1.5 + variation} -4`
-
-      $('a-sphere').setAttribute('position', position)
-
-      $('a-plane').setAttribute('rotation', `-90 ${90 * variation} 0`)
-      $('a-plane').setAttribute('color', color)
-
-      requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  </script>
--->
-
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>web AR</title>
+    <title>Sistema solar - Realidade Aumentada</title>
+    <meta name="description" content="Sistema solar em Realidade Aumentada" />
     <script src="./scripts/aframe.js"></script>
-    <script src="./scripts/animationsComponent.js"></script>
-    <script src="./scripts/gradientSky.js"></script>
-    <script src="./scripts/oceanComponent.js"></script>
-    <script src="./scripts/physicsSystem1.4.js"></script>
-    <script src="./scripts/particleSystemComponent.js"></script>
   </head>
+
   <body>
-    <a-scene physic>
-      <a-assets>
-        <a-asset-item id="tree" src="./assets/plane/scene.gltf"></a-asset-item>
-        <!-- <a-asset-item id="tree-obj" src="./assets/boat.obj"></a-asset-item>
-        <a-asset-item id="tree-mtl" src="./assets/boat.mtl"></a-asset-item> -->
-      </a-assets>
-      <a-entity
-        id="rain"
-        particle-system="preset: rain; color: #fff; particleCount: 1000"
-      ></a-entity>
-      <a-entity
-        position="0 -1 -15"
-        scale="0.01 0.01 0.01"
-        color="red"
-        rotation="280 0 0"
-        gltf-model-legacy="#tree"
-        animation="property: position; easing: easeInOutQuad; dir: forwards; dur: 6000; to: -15 -3 -15"
-        animation="property: rotation; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 280 180 0; repeat: indefinite "
-        ></a-entity>
-        <!-- obj-model="obj: #tree-obj; mtl: #tree-mtl" -->
-      <!--
-        <a-entity id="sphere" geometry="primitive: sphere"
-             material="color: #ffa; shader: flat"
-             position="0 0.15 -1"
-             light="type: spot; intensity: 15"
-             animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 -0.10 -5; loop: true"></a-entity>
-      -->
-      <a-box
-        color="#EF2D5E"
-        position="0 1 -4"
-        change-color-on-hover="color: blue"
-      ></a-box>
-
-      <a-camera><a-cursor></a-cursor></a-camera>
-      <a-entity
-        id="ocean"
-        ocean="density: 10; width: 50; depth: 50; speed: 4"
-        material="color: #afd; opacity: 0.75; metalness: 0; roughness: 1"
-        event-set__enter="_event: mouseenter; color: #8FF7FF"
-        event-set__leave="_event: mouseleave; color: #4CC3D9"
-        rotation="-90 0 0"
-      ></a-entity>
-
-      <a-entity
-        id="sky"
-        geometry="primitive: sphere; radius: 5000"
-        material="shader: gradient; topColor: 100 155 250; bottomColor: 00 05 110"
-        scale="-1 1 1"
-      ></a-entity>
-
-      <a-entity id="light" light="type: ambient; color: #888"></a-entity>
-    </a-scene>
-    <!--
-      <a-scene physic>
-        <a-box
-          position="-1 4 -3"
-          rotation="0 45 0"
-          color="#4CC3D9"
-          dynamic-body
-        ></a-box>
-        <a-box position="-1 8 -3" rotation="0 45 0" dynamic-body color="#4CC3D9"></a-box>
-        <a-sphere position="0 4.25 -5" radius="1.25" dynamic-body color="#EF2D5E"></a-sphere>
-        <a-entity geometry="primitive: sphere; radius: 1.5"
-            light="type: point; color: #DEADFE; intensity: 9"
-            material="color: white; shader: flat;"
-            position="-1 1 -6"></a-entity>
-        <a-cylinder
-          position="1 12.75 -3"
-          radius="0.5"
-          height="1.5"
-          dynamic-body color="#FFC65D"
-        ></a-cylinder>
-        <a-plane
-          position="0 0 -4"
-          rotation="-90 0 0"
-          width="4"
-          height="4"
-          color="#7BC8A4"
-          static-body
-        ></a-plane>
-        <a-sky color="#212121"></a-sky>
-      </a-scene>
-    -->
     <script>
-      AFRAME.registerComponent('change-color-on-hover', {
-        schema: {
-          color: { default: 'red' }
-        },
-
-        init: function() {
-          var data = this.data;
-          var el = this.el; // <a-box>
-          var defaultColor = el.getAttribute('material').color;
-
-          el.addEventListener('mouseenter', function() {
-            el.setAttribute('color', data.color);
-          });
-
-          el.addEventListener('mouseleave', function() {
-            el.setAttribute('color', defaultColor);
-          });
-        }
-      });
+      function planet(value) {
+        document.getElementById('detailsEntity').setAttribute('value', value);
+      }
     </script>
+    <a-scene>
+      <!-- Camera and cursor controls -->
+      <a-entity position="0 2.2 4">
+        <a-entity camera look-controls wasd-controls>
+          <a-entity
+            position="0 0 -3"
+            geometry="primitive: ring; radiusOuter: 0.30;
+                              radiusInner: 0.25;"
+            material="color: red; shader: flat;"
+            cursor="maxDistance: 30; fuse: true"
+          >
+            <a-text
+              scale="2 2 2"
+              id="detailsEntity"
+              position="-5 -4 0"
+              font="roboto"
+              width="20"
+              height="auto"
+              color="aqua"
+              value=""
+            ></a-text>
+            <a-animation
+              begin="click"
+              easing="ease-in"
+              attribute="scale"
+              fill="backwards"
+              from="0.1 0.1 0.1"
+              to="1 1 1"
+              dur="150"
+            >
+            </a-animation>
+            <a-animation
+              begin="fusing"
+              easing="ease-in"
+              attribute="scale"
+              fill="forwards"
+              from="1 1 1"
+              to="0.1 0.1 0.1"
+              dur="1500"
+            >
+            </a-animation>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+
+      <!-- Asset Management -->
+      <a-assets>
+        <img id="Sun" src="./assets/textures/stars/sol.jpg" />
+        <img id="Mercury" src="./assets/textures/planets/mercury.jpg" />
+        <img id="Venus" src="./assets/textures/planets/venus.jpg" />
+        <img id="earth" src="./assets/textures/planets/earth.jpg" />
+        <img id="Mars" src="./assets/textures/planets/mars.jpg" />
+        <img id="Jupiter" src="./assets/textures/planets/jupter.jpg" />
+        <img id="Saturn" src="./assets/textures/planets/saturn.png" />
+        <img id="Neptune" src="./assets/textures/planets/neptune.jpg" />
+        <img id="Uranus" src="./assets/textures/planets/uranus.jpg" />
+        <img id="Pluto" src="./assets/textures/planets/pluto.jpg" />
+        <img id="GSky" src="./assets/spac.jpg" />
+        <img id="Moon" src="./assets/textures/planets/moon.jpg" />
+      </a-assets>
+
+      <!-- Basic sphere with rotation animation -SUN -->
+      <a-sphere
+        onclick="planet('ESTREKA: SOL \n TEMPERATURA: 5505 ºC')"
+        position="-550 1.25 -15"
+        radius="100.5"
+        src="#Sun"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="1"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -MERCURY -->
+      <a-sphere
+        onclick="planet('PLANETA: MERCURIO \n PERIODO DE ROTACAO: 58 DIAS')"
+        position="-50 1.25 -5"
+        radius="1.9"
+        src="#Mercury"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="5"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -VENUS -->
+      <a-sphere
+        onclick="planet('PLANETA: VENUS \n PERIODO DE ROTACAO: 225 DIAS')"
+        position="-25 1.25 -5"
+        radius="2.0"
+        src="#Venus"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="5"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -EARTH -->
+      <a-sphere
+        onclick="planet('PLANETA: TERRA \n PERIODO DE ROTACAO: 365 DIAS \n Nois aque o/')"
+        position="-4 1.25 -5"
+        radius="2.5"
+        src="#earth"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="5"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -MOON -->
+      <a-sphere
+        onclick="planet('SATELITE: LUA \n DISTANCIA DA TERRA: 384.400 KM')"
+        position="0 1.25 -2.5"
+        radius="0.25"
+        src="#Moon"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="1"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -MARS -->
+      <a-sphere
+        onclick="planet('PLANETA: MARTE \n PERIODO DE ROTACAO: 687 DIAS')"
+        position="26 1.25 -5"
+        radius="2.5"
+        src="#Mars"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="5"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -JUPITER -->
+      <a-sphere
+        onclick="planet('PLANETA: JUPITER \n PERIODO DE ROTACAO: 4.332 DIAS')"
+        position="140 17.25 -51"
+        radius="50.5"
+        src="#Jupiter"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="2"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -SATURN -->
+      <a-entity
+        position="100 25.25 30"
+        rotation="139 40 80"
+        geometry="primitive: ring; radiusOuter: 9;
+                      radiusInner: 7;"
+        material="color: skyblue;"
+      >
+        <a-sphere
+          onclick="planet('PLANETA: SATURNO \n PERIODO DE ROTACAO: 10.760 DIAS')"
+          position="0 0 0"
+          radius="5.5"
+          src="#Saturn"
+        >
+          <a-animation
+            begin="click"
+            to="0 360 0"
+            attribute="rotation"
+            fill="backwards"
+            duration="1"
+            repeat="2"
+            easing="linear"
+            segment-height="56"
+          >
+          </a-animation>
+        </a-sphere>
+      </a-entity>
+
+      <!-- Basic sphere with rotation animation -NEPTUNE -->
+      <a-sphere
+        onclick="planet('PLANETA: NETURNO \n PERIODO DE ROTACAO: 60.190 DIAS')"
+        position="130 19.25 -190"
+        radius="8"
+        src="#Neptune"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="3"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -URANUS -->
+      <a-sphere
+        onclick="planet('PLANETA: URANO \n PERIODO DE ROTACAO: 30.799 DIAS')"
+        position="160 10.25 -200"
+        radius="7.5"
+        src="#Uranus"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="2"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Basic sphere with rotation animation -PLUTO -->
+      <a-sphere
+        onclick="planet('PLANETA: PLUTÃO \n PERIODO DE ROTACAO: 248 ANOS')"
+        position="200 28.25 40"
+        radius="2.5"
+        src="#Pluto"
+      >
+        <a-animation
+          begin="click"
+          to="0 360 0"
+          attribute="rotation"
+          fill="backwards"
+          duration="1"
+          repeat="2"
+          easing="linear"
+          segment-height="56"
+        >
+        </a-animation>
+      </a-sphere>
+
+      <!-- Under a sky -->
+      <a-sky src="#GSky"> </a-sky>
+    </a-scene>
   </body>
 </html>
