@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sistema solar - Realidade Aumentada</title>
+    <title>Realidade Aumentada - Kevin Martin</title>
     <meta name="description" content="Sistema solar em Realidade Aumentada" />
     <script src="./scripts/aframe.js"></script>
   </head>
@@ -18,7 +18,7 @@
     <a-scene>
       <!-- Camera and cursor controls -->
       <a-entity position="0 2.2 4">
-        <a-entity camera look-controls wasd-controls>
+        <a-entity camera look-controls wasd-controls daydream-controls>
           <a-entity
             position="0 0 -3"
             geometry="primitive: ring; radiusOuter: 0.30;
@@ -29,9 +29,9 @@
             <a-text
               scale="2 2 2"
               id="detailsEntity"
-              position="-5 -4 0"
+              position="-9 -4 0"
               font="roboto"
-              width="20"
+              width="15"
               height="auto"
               color="aqua"
               value=""
@@ -78,7 +78,7 @@
 
       <!-- Basic sphere with rotation animation -SUN -->
       <a-sphere
-        onclick="planet('ESTREKA: SOL \n TEMPERATURA: 5505 ºC')"
+        onclick="planet('ESTRELA: SOL \n TEMPERATURA: 5505 ºC')"
         position="-550 1.25 -15"
         radius="100.5"
         src="#Sun"
