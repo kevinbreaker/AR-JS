@@ -11,19 +11,17 @@
 
   <body>
     <script>
-      function planet(value) {
-        document.getElementById('detailsEntity').setAttribute('value', value);
-      }
+      const planet = (value) => document.getElementById('detailsEntity').setAttribute('value', value)
     </script>
     <a-scene>
-      <!-- Camera and cursor controls -->
+      <!-- Camera -->
       <a-entity position="0 2.2 4">
         <a-entity camera look-controls wasd-controls daydream-controls>
           <a-entity
             position="0 0 -3"
             geometry="primitive: ring; radiusOuter: 0.30;
                               radiusInner: 0.25;"
-            material="color: red; shader: flat;"
+            material="color: aqua; shader: flat;"
             cursor="maxDistance: 30; fuse: true"
           >
             <a-text
@@ -60,7 +58,7 @@
         </a-entity>
       </a-entity>
 
-      <!-- Asset Management -->
+      <!-- Images -->
       <a-assets>
         <img id="Sun" src="./assets/textures/stars/sol.jpg" />
         <img id="Mercury" src="./assets/textures/planets/mercury.jpg" />
@@ -76,11 +74,12 @@
         <img id="Moon" src="./assets/textures/planets/moon.jpg" />
       </a-assets>
 
-      <!-- Basic sphere with rotation animation -SUN -->
+      <!-- SOL -->
       <a-sphere
+        id="#thesun"
         onclick="planet('ESTRELA: SOL \n TEMPERATURA: 5505 ºC')"
-        position="-550 1.25 -15"
-        radius="100.5"
+        position="-950 1.25 -15"
+        radius="400"
         src="#Sun"
       >
         <a-animation
@@ -96,7 +95,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -MERCURY -->
+      <!-- MERCURIO -->
       <a-sphere
         onclick="planet('PLANETA: MERCURIO \n PERIODO DE ROTACAO: 58 DIAS')"
         position="-50 1.25 -5"
@@ -116,7 +115,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -VENUS -->
+      <!-- VENUS -->
       <a-sphere
         onclick="planet('PLANETA: VENUS \n PERIODO DE ROTACAO: 225 DIAS')"
         position="-25 1.25 -5"
@@ -136,7 +135,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -EARTH -->
+      <!-- TERRA -->
       <a-sphere
         onclick="planet('PLANETA: TERRA \n PERIODO DE ROTACAO: 365 DIAS \n Nois aque o/')"
         position="-4 1.25 -5"
@@ -156,7 +155,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -MOON -->
+      <!-- LUA-->
       <a-sphere
         onclick="planet('SATELITE: LUA \n DISTANCIA DA TERRA: 384.400 KM')"
         position="0 1.25 -2.5"
@@ -176,7 +175,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -MARS -->
+      <!-- MARTE -->
       <a-sphere
         onclick="planet('PLANETA: MARTE \n PERIODO DE ROTACAO: 687 DIAS')"
         position="26 1.25 -5"
@@ -196,7 +195,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -JUPITER -->
+      <!-- JUPITER -->
       <a-sphere
         onclick="planet('PLANETA: JUPITER \n PERIODO DE ROTACAO: 4.332 DIAS')"
         position="140 17.25 -51"
@@ -216,7 +215,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -SATURN -->
+      <!-- SATURNO -->
       <a-entity
         position="100 25.25 30"
         rotation="139 40 80"
@@ -244,9 +243,9 @@
         </a-sphere>
       </a-entity>
 
-      <!-- Basic sphere with rotation animation -NEPTUNE -->
+      <!-- NETUNO -->
       <a-sphere
-        onclick="planet('PLANETA: NETURNO \n PERIODO DE ROTACAO: 60.190 DIAS')"
+        onclick="planet('PLANETA: NETUNO \n PERIODO DE ROTACAO: 60.190 DIAS')"
         position="130 19.25 -190"
         radius="8"
         src="#Neptune"
@@ -264,7 +263,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -URANUS -->
+      <!-- URANUS -->
       <a-sphere
         onclick="planet('PLANETA: URANO \n PERIODO DE ROTACAO: 30.799 DIAS')"
         position="160 10.25 -200"
@@ -284,7 +283,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Basic sphere with rotation animation -PLUTO -->
+      <!-- PLUTAO -->
       <a-sphere
         onclick="planet('PLANETA: PLUTÃO \n PERIODO DE ROTACAO: 248 ANOS')"
         position="200 28.25 40"
@@ -304,7 +303,7 @@
         </a-animation>
       </a-sphere>
 
-      <!-- Under a sky -->
+      <!-- CÉU-->
       <a-sky src="#GSky"> </a-sky>
     </a-scene>
   </body>
